@@ -1,4 +1,111 @@
-.vertical-fill {
+/* BODY FILL COMPLETE PAGE VERTICALLY*/
+.vertical-fill 
+{
     height: 100%;
     min-height: 100%;
 }
+
+/* REFRIGERATOR IMAGE */
+#img_nevera 
+{
+    width: 265px;
+}
+
+.img-glow
+{
+    box-shadow: 0px 0px 8px 4px red;
+}
+
+/* TOOGLE SWITCH FOR LIGHT CONTROL*/
+#luz_refrigerador_label
+{
+    top: 200px;
+    left: 50%;
+}
+
+#luz_congelador_label
+{
+    top: 500px;
+    left: 50%;
+}
+
+/* The switch - the box around the slider */
+.switch 
+{
+    position: absolute;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    border-radius: 50%;
+}
+  
+/* Hide default HTML checkbox */
+.switch input 
+{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-glow
+{
+    box-shadow: 0px 0px 8px 4px #FFD800;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+/* The slider */
+.slider 
+{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before 
+{
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider 
+{
+    background-color: #FFD800;
+}
+
+input:focus + .slider 
+{
+    box-shadow: 0 0 1px #FFD800;
+}
+
+input:checked + .slider:before 
+{
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+}
+
+/* Rounded sliders */
+.slider.round 
+{
+    border-radius: 34px;
+}
+
+.slider.round:before 
+{
+    border-radius: 50%;
+}
+

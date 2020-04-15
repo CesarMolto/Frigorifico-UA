@@ -20,9 +20,19 @@
 	<!-- INTERFACE CODE -->
 	<div class="container text-center vertical-fill">
 		<div class="col d-flex align-items-center justify-content-center vertical-fill">
-			<img class="img-fluid" src="images/Digital_Frigorifico.png" alt="Frigorifico" height="30%" width="30%">
-			<!--<button onclick="encenderLuzRefrigerador()">Encender luz refrigerador</button>
-			<button onclick="apagarLuzRefrigerador()">Apagar luz refrigerador</button>-->
+			<img id="img_nevera" class="img-glow" src="images/Digital_Frigorifico.png" alt="Frigorifico">
+
+			<!-- CONTROL LUZ REFRIGERADOR -->
+			<label id="luz_refrigerador_label" class="switch">
+				<input id="luz_refrigerador" type="checkbox">
+				<span class="slider round"></span>
+			</label>
+			<!-- CONTROL LUZ CONGELADOR -->
+			<label id="luz_congelador_label" class="switch">
+				<input id="luz_congelador" type="checkbox">
+				<span class="slider round"></span>
+			</label>
+
 		</div>
 	</div>
 
@@ -33,12 +43,38 @@
 			console.log("Ya estoy conectado con el frigorifico!!!")
 			console.log("Con este hay " + frigo.clientes + " clientes conectados");
 
-			function encenderLuzRefrigerador() {
-				frigo.refrigeradorLuz = true;
+			/* CONTROL LUZ REFRIGERADOR */
+			document.getElementById("luz_refrigerador").addEventListener("click", function() { controlLuzRefrigerador(this); }, false);
+
+			function controlLuzRefrigerador(e) 
+			{
+				if(e.checked)
+				{
+					frigo.refrigeradorLuz = true;
+					e.parentElement.classList.add("switch-glow");
+				}	
+				else
+				{
+					frigo.refrigeradorLuz = false;
+					e.parentElement.classList.remove("switch-glow");
+				}		
 			}
 
-			function apagarLuzRefrigerador() {
-				frigo.refrigeradorLuz = false;
+			document.getElementById("luz_congelador").addEventListener("click", function() { controlLuzCongelador(this); }, false);
+
+			/* CONTROL LUZ CONGELADOR */
+			function controlLuzCongelador(e) 
+			{
+				if(e.checked)
+				{
+					frigo.congeladorLuz = true;
+					e.parentElement.classList.add("switch-glow");
+				}
+				else
+				{
+					frigo.congeladorLuz = false;
+					e.parentElement.classList.remove("switch-glow");
+				}
 			}
 
 			// Activar la luz del refrigerador cuando se abre la puerta
