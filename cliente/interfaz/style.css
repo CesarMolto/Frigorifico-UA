@@ -16,17 +16,36 @@
     box-shadow: 0px 0px 8px 4px red;
 }
 
+/* DISPLAY TEXT FOR TEMPERATURE CONTROL */
+.text-glow
+{
+    color: #3366ff;
+    text-shadow: 0px 0px 15px #3366ff;
+}
+
+#temperatura_refrigerador
+{
+    position: absolute;
+    top: 200px;
+    font-size: 25px;
+}
+
+#temperatura_congelador
+{
+    position: absolute;
+    top: 460px;
+    font-size: 20px;
+}
+
 /* TOOGLE SWITCH FOR LIGHT CONTROL*/
 #luz_refrigerador_label
 {
-    top: 200px;
-    left: 50%;
+    top: 300px;
 }
 
 #luz_congelador_label
 {
-    top: 500px;
-    left: 50%;
+    top: 510px;
 }
 
 /* The switch - the box around the slider */

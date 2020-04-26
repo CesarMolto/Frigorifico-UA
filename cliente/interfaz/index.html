@@ -21,7 +21,10 @@
 	<div class="container text-center vertical-fill">
 		<div class="col d-flex align-items-center justify-content-center vertical-fill">
 			<img id="img_nevera" class="img-glow" src="images/Digital_Frigorifico.png" alt="Frigorifico">
-
+			<!-- CONTROL TEMPERATURA REFRIGERADOR -->
+			<span id="temperatura_refrigerador" class="text-glow"></span>
+			<!-- CONTROL TEMPERATURA CONGELADOR -->
+			<span id="temperatura_congelador" class="text-glow"></span>
 			<!-- CONTROL LUZ REFRIGERADOR -->
 			<label id="luz_refrigerador_label" class="switch">
 				<input id="luz_refrigerador" type="checkbox">
@@ -43,16 +46,37 @@
 			console.log("Ya estoy conectado con el frigorifico!!!")
 			console.log("Con este hay " + frigo.clientes + " clientes conectados");
 
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL TEMPERATURA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			/* CONTROL TEMPERATURA REFRIGERADOR */
+			function displayTemperaturaRefrigerador()
+			{
+				document.getElementById("temperatura_refrigerador").innerHTML = frigo.refrigeradorTemperatura + " ºC";
+			}
+			frigo.on("refrigeradorTemperatura", function(temperatura)
+			{
+				displayTemperaturaRefrigerador();
+			});
+
+			/* CONTROL TEMPERATURA CONGELADOR */
+			function displayTemperaturaCongelador()
+			{
+				document.getElementById("temperatura_congelador").innerHTML = frigo.congeladorTemperatura + " ºC";
+			}
+			frigo.on("congeladorTemperatura", function(temperatura)
+			{
+				displayTemperaturaCongelador();
+			});
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL LUZ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			/* CONTROL LUZ REFRIGERADOR */
 			document.getElementById("luz_refrigerador").addEventListener("click", function() { controlLuzRefrigerador(this); }, false);
-
 			function controlLuzRefrigerador(e) 
 			{
 				if(e.checked)
 				{
 					frigo.refrigeradorLuz = true;
 					e.parentElement.classList.add("switch-glow");
-				}	
+				}
 				else
 				{
 					frigo.refrigeradorLuz = false;
@@ -60,9 +84,8 @@
 				}		
 			}
 
-			document.getElementById("luz_congelador").addEventListener("click", function() { controlLuzCongelador(this); }, false);
-
 			/* CONTROL LUZ CONGELADOR */
+			document.getElementById("luz_congelador").addEventListener("click", function() { controlLuzCongelador(this); }, false);
 			function controlLuzCongelador(e) 
 			{
 				if(e.checked)
@@ -74,13 +97,20 @@
 				{
 					frigo.congeladorLuz = false;
 					e.parentElement.classList.remove("switch-glow");
-				}
+				}	
 			}
 
 			// Activar la luz del refrigerador cuando se abre la puerta
 			frigo.on("refrigeradorPuerta", function (abierta) {
-				console.log("Puerta:", abierta);
-				frigo.refrigeradorLuz = abierta;
+				console.log("Puerta refrigerador:", abierta);
+				document.getElementById("luz_refrigerador").checked = !abierta;
+				document.getElementById("luz_refrigerador").click();
+			});
+			// Activar la luz del congelador cuando se abre la puerta
+			frigo.on("congeladorPuerta", function (abierta) {
+				console.log("Puerta congelador:", abierta);
+				document.getElementById("luz_congelador").checked = !abierta;
+				document.getElementById("luz_congelador").click();
 			});
 		});
 	</script>
