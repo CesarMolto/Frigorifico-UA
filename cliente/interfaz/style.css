@@ -8,6 +8,7 @@
 /* REFRIGERATOR IMAGE */
 #img_nevera 
 {
+    position: absolute;
     width: 265px;
 }
 
@@ -257,12 +258,13 @@ outline: none;
 #botones
 {
     position: absolute;
-    top: 740px;
+    top: 720px;
 }
-#myBtn, #myBtn2, #myBtn3
+#myBtn, #myBtn2
 {
-    margin: 0.8rem;
-    font-size: 30px;
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 25px;
     font-weight: bold;
     border-radius: 50%;
 }
@@ -279,16 +281,118 @@ outline: none;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
+
+/* Info msg */
+#myBtn .tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 20px;
+    font-weight: normal;
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    bottom: 90%;
+    left: 50%;
+    margin-left: -115px; /* Use half of the width (120/2 = 60), to center the tooltip */
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+#myBtn:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Info msg */
+#myBtn2 .tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 20px;
+    font-weight: normal;
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    bottom: 90%;
+    left: 50%;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+#myBtn2:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
   
 /***** CONTROL MODO PANTALLA *****/
-#modo_pantalla
+#pantalla
 {
     position: absolute;
     top: 850px;
+    padding: 0.5rem;
+    border: solid 2px #ddd;
+    border-radius: 5px;
+}
+
+#modo_pantalla
+{
+    margin: 0.3rem;
     font-size: 20px;
     font-weight: bold;
     color: #ddd;
     border: solid 2px #ddd;
     border-radius: 5px;
     background-color: #343A40;
+}
+
+#modo_pantalla:hover, #modo_refrigerador:hover, #modo_congelador:hover
+{
+    cursor: pointer;
+    border: solid 2px #A0A0A0;
+    transition: border 0.5s;
+}
+
+#icono_brillo
+{
+    margin-bottom: 0.25rem;
+}
+
+/* Info msg */
+#pantalla .tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 20px;
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+#pantalla:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
