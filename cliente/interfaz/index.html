@@ -21,10 +21,24 @@
 	<div class="container text-center vertical-fill">
 		<div class="col d-flex align-items-center justify-content-center vertical-fill">
 			<img id="img_nevera" class="img-glow" src="images/Digital_Frigorifico.png" alt="Frigorifico">
+			<!-- HORA -->
+			<div id="hora"></div>
+			<!-- TEMPERATURA EXTERIOR -->
+			<span id="temperatura_exterior" class="text-glow"></span>
 			<!-- CONTROL TEMPERATURA REFRIGERADOR -->
+			<div id="control_temperatura_refrigerador" class="number-input md-number-input">
+				<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+				<input id="temperatura_refrigerador_control" class="quantity" min="-5" max="25" name="quantity" value="22" type="number">
+				<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+			</div>
 			<span id="temperatura_refrigerador" class="text-glow"></span>
 			<!-- CONTROL TEMPERATURA CONGELADOR -->
 			<span id="temperatura_congelador" class="text-glow"></span>
+			<div id="control_temperatura_congelador" class="number-input md-number-input">
+				<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+				<input id="temperatura_congelador_control" class="quantity" min="-30" max="22" name="quantity" value="22" type="number">
+				<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+			</div>
 			<!-- CONTROL LUZ REFRIGERADOR -->
 			<label id="luz_refrigerador_label" class="switch">
 				<input id="luz_refrigerador" type="checkbox">
@@ -35,37 +49,170 @@
 				<input id="luz_congelador" type="checkbox">
 				<span class="slider round"></span>
 			</label>
-
+			<!-- CONTROL MODO REFRIGERADOR -->
+			<select id="modo_refrigerador" class="mdb-select md-form colorful-select dropdown-primary">
+				<option value="0">OFF</option>
+				<option value="1">ON</option>
+				<option value="2">SPEED</option>
+			</select>
+			<!-- CONTROL MODO CONGELADOR -->
+			<select id="modo_congelador" class="mdb-select md-form colorful-select dropdown-primary">
+				<option value="0">OFF</option>
+				<option value="1">ON</option>
+				<option value="2">SPEED</option>
+			</select>
+			<!-- BOTONES DE ABAJO -->
+			<div id="botones" class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+				<button id="myBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#pedido">P</button>
+				<button id="myBtn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#estadisticas">E</button>
+				<button id="myBtn" type="button" class="btn btn-primary">M</button>
+			</div>
+			<!-- PEDIDO -->
+			<div class="modal fade" id="pedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pedido</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+					...
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Confirmar</button>
+					</div>
+				</div>
+				</div>
+			</div>
+			<!-- ESTADISTICAS -->
+			<div class="modal fade" id="estadisticas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Estadísticas</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+					...
+					</div>
+				</div>
+				</div>
+			</div>
+			<!-- CONTROL MODO PANTALLA -->
+			<!-- Pantalla negra -->
+			<div id="blackScreen" class="blackScreen"></div>
+			<select id="modo_pantalla" class="mdb-select md-form colorful-select dropdown-primary">
+				<option value="0">ON</option>
+				<option value="1">ECO</option>
+				<option value="2">OFF</option>
+			</select>
 		</div>
 	</div>
 
-	<!-- FUNCTIONAL CODE -->
+	<!--====================================================================================================
+	=
+	=											FUNCTIONAL CODE 
+	=
+	=====================================================================================================-->
 	<script>
 		var frigo = new Electro();
+
 		frigo.on("connect", function () {
 			console.log("Ya estoy conectado con el frigorifico!!!")
 			console.log("Con este hay " + frigo.clientes + " clientes conectados");
+			
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HORA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			function startTime() {
+				var today = new Date();
+				var h = today.getHours();
+				var m = today.getMinutes();
+				var s = today.getSeconds();
+				m = checkTime(m);
+				s = checkTime(s);
+				document.getElementById('hora').innerHTML = h + ":" + m + ":" + s;
+				var t = setTimeout(startTime, 500);
+			}
+			function checkTime(i) {
+				if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+				return i;
+			}
+			startTime();
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL TEMPERATURA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			/* TEMPERATURA EXTERIOR */
+			frigo.on("exteriorTemperatura", function(temperatura)
+			{
+				document.getElementById("temperatura_exterior").innerHTML = frigo.exteriorTemperatura + " ºC";
+			});
+			
 			/* CONTROL TEMPERATURA REFRIGERADOR */
-			function displayTemperaturaRefrigerador()
+			function displayTemperaturaRefrigerador() //Temperatura actual
 			{
 				document.getElementById("temperatura_refrigerador").innerHTML = frigo.refrigeradorTemperatura + " ºC";
 			}
 			frigo.on("refrigeradorTemperatura", function(temperatura)
 			{
 				displayTemperaturaRefrigerador();
+
+				if (frigo.refrigeradorTemperatura < document.getElementById("temperatura_refrigerador_control").value-0.9)
+				{ //Apagamos el motor si se alcanza la temperatura deseada
+					frigo.refrigeradorMotor = 0;
+				}
+				if (frigo.refrigeradorTemperatura > document.getElementById("temperatura_refrigerador_control").value+0.9)
+				{ //Encendemos el motor si se baja la temperatura
+					frigo.refrigeradorMotor = 1;
+				}
+			});
+			
+			document.getElementById("control_temperatura_refrigerador").addEventListener("click", function()
+			{
+				if (frigo.refrigeradorTemperatura > document.getElementById("temperatura_refrigerador_control").value)
+				{ //Encendemos el motor si se baja la temperatura
+					frigo.refrigeradorMotor = 1;
+					document.getElementById("modo_refrigerador").value = frigo.refrigeradorMotor;
+				}
 			});
 
 			/* CONTROL TEMPERATURA CONGELADOR */
-			function displayTemperaturaCongelador()
+			function displayTemperaturaCongelador() //Temperatura actual
 			{
 				document.getElementById("temperatura_congelador").innerHTML = frigo.congeladorTemperatura + " ºC";
 			}
 			frigo.on("congeladorTemperatura", function(temperatura)
 			{
 				displayTemperaturaCongelador();
+			
+				if (frigo.congeladorTemperatura < document.getElementById("temperatura_congelador_control").value-0.9)
+				{ //Apagamos el motor si se alcanza la temperatura deseada
+					frigo.congeladorMotor = 0;
+				}
+				if (frigo.congeladorTemperatura > document.getElementById("temperatura_congelador_control").value+0.9)
+				{ //Encendemos el motor si se baja la temperatura
+					frigo.congeladorMotor = 1;
+				}
 			});
+			
+			document.getElementById("control_temperatura_congelador").addEventListener("click", function()
+			{
+				if (frigo.congeladorTemperatura > document.getElementById("temperatura_congelador_control").value)
+				{ //Encendemos el motor si se baja la temperatura
+					frigo.congeladorMotor = 1;
+					document.getElementById("modo_congelador").value = frigo.congeladorMotor;
+				}
+			});
+
+			/* ASIGNAR TEMPERATURA AL ENCENDER LA PANTALLA */
+			function displayControlTemperaturas() //Temperatura deseada
+			{
+				document.getElementById("temperatura_refrigerador_control").value = Math.round(frigo.refrigeradorTemperatura);
+				document.getElementById("temperatura_congelador_control").value = Math.round(frigo.congeladorTemperatura);
+			}
+			displayControlTemperaturas();
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL LUZ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			/* CONTROL LUZ REFRIGERADOR */
@@ -112,6 +259,91 @@
 				document.getElementById("luz_congelador").checked = !abierta;
 				document.getElementById("luz_congelador").click();
 			});
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL MODO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			/* CONTROL MODO REFRIGERADOR */
+			document.getElementById("modo_refrigerador").addEventListener("click", function()
+			{
+				frigo.refrigeradorMotor = document.getElementById("modo_refrigerador").value;
+			});
+			/* CONTROL MODO CONGELADOR */
+			document.getElementById("modo_congelador").addEventListener("change", function()
+			{
+				frigo.congeladorMotor = document.getElementById("modo_congelador").value;
+			});
+			/*ASIGNAR MODO AL ENCENDER PANTALLA*/
+			function asignMode()
+			{
+				document.getElementById("modo_refrigerador").value = frigo.refrigeradorMotor;
+				document.getElementById("modo_congelador").value = frigo.congeladorMotor;
+			}
+			asignMode();
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PEDIDO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			// Get the blackScreen
+			var blackScreen = document.getElementById("blackScreen");
+
+			// Get the button that opens the blackScreen
+			//var btn = document.getElementById("myBtn");
+
+			// Get the <span> element that closes the blackScreen
+			var span = document.getElementsByClassName("close")[0];
+			
+			var modoPantalla = document.getElementById("modo_pantalla");
+
+			// When the user clicks on the button, open the blackScreen
+			//btn.onclick = function() {
+			//	blackScreen.style.display = "block";
+			//	blackScreenContent.style.display = "block";
+			//}
+
+			// When the user clicks on <span> (x), close the blackScreen
+			span.onclick = function() {
+				blackScreen.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the blackScreen, close it
+			window.onclick = function(event) {
+				if (event.target == blackScreen) {
+					blackScreen.style.display = "none";
+				}
+				if (modoPantalla.value == 2)
+				{
+					modoPantalla.value = 0;
+					frigo.frigorificoPantalla = 0;
+				}
+				if (modoPantalla.value == 1)
+				{
+					//blackScreen.style.display = "block";
+					//blackScreen.style.backgroundColor = 'rgba(' + 0 + ',' + 0 + ',' + 0 + ',' + 0.4 + ')';
+					blackScreen.style.overflow = "hidden";
+				}
+			}
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL MODO PANTALLA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			modoPantalla.value = frigo.frigorificoPantalla;
+
+			modoPantalla.onclick = function()
+			{
+				if (modoPantalla.value == 0)
+				{
+					blackScreen.style.display = "none";
+					frigo.frigorificoPantalla = 0;
+				}
+				if (modoPantalla.value == 1)
+				{
+					blackScreen.style.display = "none";
+					//blackScreen.style.display = "block";
+					//blackScreen.style.backgroundColor = 'rgba(' + 0 + ',' + 0 + ',' + 0 + ',' + 0.4 + ')';
+					frigo.frigorificoPantalla = 1;
+				}
+				if (modoPantalla.value == 2)
+				{
+					blackScreen.style.display = "block";
+					blackScreen.style.backgroundColor = 'rgba(' + 0 + ',' + 0 + ',' + 0 + ',' + 1 + ')';
+					frigo.frigorificoPantalla = 2;
+				}
+			}
 		});
 	</script>
 </body>
