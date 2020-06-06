@@ -27,43 +27,55 @@
 #hora
 {
     position: absolute;
-    top: 175px;
-    font-size: 25px;
+    top: 115px;
+    font-size: 30px;
     color: #ddd;
     border: solid 3px #aaa;
     padding: 2px;
 }
 
-#temperatura_exterior
+/* TEMPERATURA EXTERIOR */
+#div_temperatura_exterior
 {
     position: absolute;
-    top: 110px;
-    font-size: 25px;
+    top: 185px;
+    font-size: 26px;
+    border: dotted 2px #ddd;
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
 }
 
-#temperatura_refrigerador
+/* TEMPERATURA REFRIGERADOR */
+#div_temperatura_refrigerador
 {
     position: absolute;
-    top: 220px;
-    font-size: 25px;
+    top: 270px;
+    font-size: 26px;
+    border: dotted 2px #ddd;
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
 }
 
-#temperatura_congelador
+/* TEMPERATURA CONGELADOR */
+#div_temperatura_congelador
 {
     position: absolute;
-    top: 490px;
-    font-size: 25px;
+    top: 510px;
+    font-size: 26px;
+    border: dotted 2px #ddd;
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
 }
 
 /* TOOGLE SWITCH FOR LIGHT CONTROL*/
 #luz_refrigerador_label
 {
-    top: 350px;
+    top: 400px;
 }
 
 #luz_congelador_label
 {
-    top: 610px;
+    top: 630px;
 }
 
 /* The switch - the box around the slider */
@@ -147,34 +159,47 @@ input:checked + .slider:before
 }
 
 /* MODE (ON, OF, TURBO) */
-#modo_refrigerador, #modo_congelador
+#div_modo_refrigerador
 {
     position: absolute;
-    top: 400px;
+    top: 440px;
+    padding: 0.2rem;
+    border: solid 2px #ddd;
+    border-radius: 5px;
+}
+
+#div_modo_congelador
+{
+    position: absolute;
+    top: 660px;
+    padding: 0.2rem;
+    border: solid 2px #ddd;
+    border-radius: 5px;
+}
+
+#modo_refrigerador, #modo_congelador
+{
     font-size: 20px;
     font-weight: bold;
     color: #ddd;
     border: solid 2px #ddd;
     border-radius: 5px;
     background-color: #343A40;
-}
-
-#modo_congelador
-{
-    top: 650px;
+    margin-left: 0.5rem;
+    margin-top: 1px;
 }
 
 /***** CONTROL TEMPERATURA *****/
 #control_temperatura_refrigerador
 {
     position: absolute;
-    top: 235px;
+    top: 290px;
 }
 
 #control_temperatura_congelador
 {
     position: absolute;
-    top: 500px;
+    top: 520px;
 }
 
 input[type="number"] {
@@ -283,21 +308,20 @@ outline: none;
 }
 
 /* Info msg */
-#myBtn .tooltiptext {
+.tooltiptext {
     opacity: 0;
     transition: opacity 1s;
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 18px;
     visibility: hidden;
     width: 120px;
     background-color: rgba(0,0,0,0.6);
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 3px 0;
     border-radius: 6px;
-    bottom: 90%;
+    bottom: 110%;
     left: 50%;
-    margin-left: -115px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
    
     /* Position the tooltip text - see examples below! */
     position: absolute;
@@ -305,36 +329,31 @@ outline: none;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-#myBtn:hover .tooltiptext {
+#div_temperatura_refrigerador:hover .tooltiptext, #div_temperatura_exterior:hover .tooltiptext,
+#div_temperatura_congelador:hover .tooltiptext,#div_modo_refrigerador:hover .tooltiptext,
+#div_modo_congelador:hover .tooltiptext, #control_temperatura_refrigerador:hover .tooltiptext,
+#control_temperatura_congelador:hover .tooltiptext, #myBtn:hover .tooltiptext,
+#myBtn2:hover .tooltiptext, #pantalla:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
 
 /* Info msg */
-#myBtn2 .tooltiptext {
-    opacity: 0;
-    transition: opacity 1s;
+#myBtn .tooltiptext {
     font-size: 20px;
-    font-weight: normal;
-    visibility: hidden;
-    width: 120px;
-    background-color: rgba(0,0,0,0.6);
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
     bottom: 90%;
-    left: 50%;
+    margin-left: -115px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Info msg */
+#myBtn2 .tooltiptext {
+    font-size: 20px;
+    bottom: 90%;
+    margin-left: 0px; /* Use half of the width (120/2 = 60), to center the tooltip */
    
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-#myBtn2:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
 }
   
 /***** CONTROL MODO PANTALLA *****/
@@ -368,31 +387,4 @@ outline: none;
 #icono_brillo
 {
     margin-bottom: 0.25rem;
-}
-
-/* Info msg */
-#pantalla .tooltiptext {
-    opacity: 0;
-    transition: opacity 1s;
-    font-size: 20px;
-    visibility: hidden;
-    width: 120px;
-    background-color: rgba(0,0,0,0.6);
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    bottom: 110%;
-    left: 50%;
-    margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
-   
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-#pantalla:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
 }
