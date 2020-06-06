@@ -80,38 +80,39 @@
 			</div>
 			<!-- PEDIDO -->
 			<div class="modal fade" id="pedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pedido</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Pedido</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body bg-light">
+							<p>Introduzca el código de barras:</p>
+							<input id="input_pedido" class="form-control w-75 mx-auto my-4" type="number" placeholder="11111111, 22222222, 33333333..."></input>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button id="confirmar_pedido" type="button" class="btn btn-primary">Confirmar</button>
+						</div>
 					</div>
-					<div class="modal-body">
-					...
-					</div>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary">Confirmar</button>
-					</div>
-				</div>
 				</div>
 			</div>
 			<!-- ESTADISTICAS -->
 			<div class="modal fade" id="estadisticas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Estadísticas</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Estadísticas</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						...
+						</div>
 					</div>
-					<div class="modal-body">
-					...
-					</div>
-				</div>
 				</div>
 			</div>
 			<!-- CONTROL MODO PANTALLA -->
@@ -314,6 +315,12 @@
 			asignMode();
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PEDIDO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			/*document.getElementById("confirmar_pedido").addEventListener("click", function()
+			{
+				frigo.frigorificoCodigo = document.getElementById("input_pedido").value;
+			});*/
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL MODO PANTALLA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			// Get the blackScreen
 			var blackScreen = document.getElementById("blackScreen");
 
@@ -343,7 +350,6 @@
 				}
 			}
 
-			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL MODO PANTALLA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			modoPantalla.value = frigo.frigorificoPantalla;
 
 			modoPantalla.onclick = function()
