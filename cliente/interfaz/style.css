@@ -7,8 +7,9 @@
 
 /* REFRIGERATOR IMAGE */
 #img_nevera 
-{
+{   
     position: absolute;
+    top: 230px;
     width: 265px;
 }
 
@@ -28,7 +29,7 @@
 {
     position: absolute;
     top: 115px;
-    font-size: 30px;
+    font-size: 22px;
     color: #ddd;
     border: solid 3px #aaa;
     padding: 2px;
@@ -39,7 +40,7 @@
 {
     position: absolute;
     top: 185px;
-    font-size: 26px;
+    font-size: 22px;
     border: dotted 2px #ddd;
     border-radius: 5px;
     padding: 0.2rem 0.4rem;
@@ -50,7 +51,7 @@
 {
     position: absolute;
     top: 270px;
-    font-size: 26px;
+    font-size: 22px;
     border: dotted 2px #ddd;
     border-radius: 5px;
     padding: 0.2rem 0.4rem;
@@ -61,7 +62,7 @@
 {
     position: absolute;
     top: 510px;
-    font-size: 26px;
+    font-size: 22px;
     border: dotted 2px #ddd;
     border-radius: 5px;
     padding: 0.2rem 0.4rem;
@@ -179,7 +180,7 @@ input:checked + .slider:before
 
 #modo_refrigerador, #modo_congelador
 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #ddd;
     border: solid 2px #ddd;
@@ -242,13 +243,13 @@ text-align: center;
 .md-number-input.number-input {
 border: 2px solid #ddd;
 border-radius: 5px;
-width: 9rem;
+width: 8rem;
 }
 .md-number-input.number-input button {
 outline: none;
 width: 2rem;
-height: 2rem;
-padding-top: .3rem;
+height: 1rem;
+padding-top: .0rem;
 }
 .md-number-input.number-input button.minus {
 padding-left: 8px;
@@ -262,12 +263,12 @@ width: 1rem;
 background-color: #ddd;
 }
 .md-number-input.number-input input[type=number] {
-max-width: 4rem;
+max-width: 3rem;
 padding: .2rem;
 border: solid #ddd;
 border-width: 0 2px;
-font-size: 2rem;
-height: 3rem;
+font-size: 22px;
+height: 2rem;
 font-weight: bold;
 outline: none;
 }
@@ -289,7 +290,7 @@ outline: none;
 {
     margin: 1rem;
     padding: 1rem;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
     border-radius: 50%;
 }
