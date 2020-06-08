@@ -152,16 +152,16 @@
 			</div>
 			<!-- CONTROL MODO PANTALLA -->
 			<!-- Pantalla negra -->
-			<div id="blackScreen" class="blackScreen"></div>
+			<div id="blackScreen" class="black-screen"></div>
 			<div id="pantalla">
 				<span class="tooltiptext">Brillo</span>
 				<svg id="icono_brillo" class="bi bi-brightness-high" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
 				</svg>
 				<select id="modo_pantalla" class="mdb-select md-form colorful-select dropdown-primary">
-					<option value="0">ON</option>
+					<option value="2">ON</option>
 					<option value="1">ECO</option>
-					<option value="2">OFF</option>
+					<option value="0">OFF</option>
 				</select>
 			</div>
 			
@@ -185,7 +185,7 @@
 	=
 	=====================================================================================================-->
 	<script>
-		var frigo = new Electro();
+        var frigo = new Electro();
 
 		frigo.on("connect", function () {
 			console.log("Ya estoy conectado con el frigorifico!!!")
@@ -351,77 +351,97 @@
 			});*/
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL MODO PANTALLA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-			// Get the blackScreen
+			// Referencia a la select list del modo pantalla
+            var modoPantalla = document.getElementById("modo_pantalla");
+            modoPantalla.addEventListener("change", function() { controlPantalla(); }, false);
+
+            // Referencia a la pantalla negra de bloqueo
 			var blackScreen = document.getElementById("blackScreen");
+            blackScreen.addEventListener("click", function() { quitarBlackScreen(); }, false);
+            blackScreen.style.transition = "all 0.4s";
 
-			// Get the <span> element that closes the blackScreen
-			var span = document.getElementsByClassName("close")[0];
-			
-			var modoPantalla = document.getElementById("modo_pantalla");
+            // Funcion que controla el comportamiento de la pantalla
+            function controlPantalla()
+            {
+                frigo.frigorificoPantalla = modoPantalla.value;
 
-			// When the user clicks on <span> (x), close the blackScreen
-			span.onclick = function() {
-				blackScreen.style.display = "none";
-			}
-
-			// When the user clicks anywhere outside of the blackScreen, close it
-			window.onclick = function(event) {
-				if (event.target == blackScreen) {
-					blackScreen.style.display = "none";
-				}
-				if (modoPantalla.value == 2)
-				{
-					modoPantalla.value = 0;
-					frigo.frigorificoPantalla = 0;
-				}
-				if (modoPantalla.value == 1)
-				{
-					blackScreen.style.overflow = "hidden";
-				}
-			}
-
-			modoPantalla.value = frigo.frigorificoPantalla;
-
-			modoPantalla.onclick = function()
-			{
-				if (modoPantalla.value == 0)
-				{
-					blackScreen.style.display = "none";
-					frigo.frigorificoPantalla = 0;
-				}
-				if (modoPantalla.value == 1)
-				{
-					blackScreen.style.display = "none";
-					frigo.frigorificoPantalla = 1;
-				}
-				if (modoPantalla.value == 2)
-				{
-					blackScreen.style.display = "block";
-					blackScreen.style.backgroundColor = 'rgba(' + 0 + ',' + 0 + ',' + 0 + ',' + 1 + ')';
-					frigo.frigorificoPantalla = 2;
-				}
+                if(modoPantalla.value == 0)
+                {
+                    blackScreen.style.opacity = 1;
+                    blackScreen.style.pointerEvents = "auto";
+                }
+                else if(modoPantalla.value == 1)
+                {
+                    blackScreen.style.opacity = 0.5;
+                    blackScreen.style.pointerEvents = "none";
+                }
+                else if(modoPantalla.value == 2)
+                {
+                    blackScreen.style.opacity = 0;
+                    blackScreen.style.pointerEvents = "none";
+                }
             }
+            // Funcion que se encarga de hacer desaparecer la pantalla negra de bloqueo
+            function quitarBlackScreen()
+            {
+                modoPantalla.value = 2;
+                controlPantalla();
+            }
+
             /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ESTADISTICAS CONSUMO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
             // Load google charts
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
 
-            document.getElementById("myBtn2").addEventListener("click", function() { drawChart(); }, false);
+            // document.getElementById("myBtn2").addEventListener("click", function() { drawChart(); }, false);
+            window.setInterval(function(){ drawChart(); }, 1000);
 
             // Draw the chart and set the chart values
+            var arrayConsumo = [0, 0, 0, 0, 0, 0];
+            var arrayHora = [0, 0, 0, 0, 0, 0];
+            var i = 0;
+            var ultimoConsumo = 0;
             function drawChart() {
+                console.log("Hora: " + frigo.frigorificoHora.getHours() + " Consumo: " + frigo.frigorificoConsumo);
+                var diferenciaConsumo = frigo.frigorificoConsumo - ultimoConsumo;
+                ultimoConsumo = frigo.frigorificoConsumo;
+
+                if(i > arrayConsumo.length - 1)
+                {
+                    for(var j = 0; j < arrayConsumo.length; j++)
+                    {   
+                        if(j < arrayConsumo.length - 1)
+                        {
+                            arrayConsumo[j] = arrayConsumo[j + 1];
+                            arrayHora[j] = arrayHora[j + 1];
+                        }
+                        else
+                        {
+                            arrayConsumo[j] = 0;
+                            arrayHora[j] = 0;
+                        }       
+                    }
+
+                    i = arrayConsumo.length - 1;
+                }
+                
+                arrayConsumo[i] = diferenciaConsumo;
+                arrayHora[i] = frigo.frigorificoHora.getHours() + ":" + frigo.frigorificoHora.getMinutes() + ":" + frigo.frigorificoHora.getSeconds();
+
+                i++;
+
                 var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 8],
-                ['Friends', 2],
-                ['Eat', 2],
-                ['TV', 2],
-                ['Gym', 2],
-                ['Sleep', 8]
+                ['Hora', 'Consumo'],
+                [arrayHora[0], arrayConsumo[0]],
+                [arrayHora[1], arrayConsumo[1]],
+                [arrayHora[2], arrayConsumo[2]],
+                [arrayHora[3], arrayConsumo[3]],
+                [arrayHora[4], arrayConsumo[4]],
+                [arrayHora[5], arrayConsumo[5]]
                 ]);
 
                 // Optional; add a title and set the width and height of the chart
-                var options = {'title':'My Average Day', 'width':550, 'height':400};
+                var options = {'title':'Consumo frigorífico', 'width':'100%', 'height':'100%'};
 
                 // Display the chart inside the <div> element with id="piechart"
                 var chart = new google.visualization.LineChart(document.getElementById('linechart'));
