@@ -28,6 +28,17 @@
 			<img id="img_nevera" class="img-glow" src="images/Digital_Frigorifico.png" alt="Frigorifico">
 			<!-- HORA -->
 			<div id="hora"></div>
+			<!-- SENSOR PRESENCIA -->
+				<svg id="sensor_presencia" class="bi bi-person-fill" width="4em" height="4em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+				</svg>
+			<!-- ALARMA -->
+			<button id="btn_alarma" type="button" class="btn btn-secondary">
+				<span class="tooltiptext">Alarma</span>
+				<svg id="alarma" class="bi bi-bell-fill" width="2.5em" height="2.5em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+				</svg> 
+			</button>
 			<!-- TEMPERATURA EXTERIOR -->
 			<div id="div_temperatura_exterior">
 				<span class="tooltiptext">Temperatura exterior</span>
@@ -165,16 +176,11 @@
 				</select>
 			</div>
 			
-			<!-- <svg class="bi bi-person-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-			</svg>
+			<!--
 			<svg class="bi bi-clock" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
 				<path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
 			</svg>
-			<svg class="bi bi-bell-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
-				<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-			</svg> 
 			<i class="fa fa-lightbulb-o" style="font-size:36px"></i> -->
 		</div>
 	</div>
@@ -207,6 +213,63 @@
 				return i;
 			}
 			startTime();
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SENSOR PRESENCIA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			frigo.on("frigorificoPresencia", function()
+			{
+				if (frigo.frigorificoPresencia == true)
+				{
+					document.getElementById("sensor_presencia").style.fill = "green";
+				}
+				else
+				{
+					document.getElementById("sensor_presencia").style.fill = "white";
+				}
+			});
+
+			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ALARMA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+			document.getElementById("btn_alarma").addEventListener("click", function()
+			{
+				if (frigo.frigorificoAlarma == false)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
+				}
+				else
+				{
+					frigo.frigorificoAlarma = false;
+					document.getElementById("alarma").style.fill = "white";
+				}
+			});
+			
+			//Al encender la pantalla
+			if (frigo.frigorificoAlarma == false)
+			{
+				document.getElementById("alarma").style.fill = "white";
+			}
+			else
+			{
+				document.getElementById("alarma").style.fill = "red";
+			}
+
+			//Puerta refrigerador abierta
+			/*var contRefrigeradorPuerta = 0;
+			frigo.on("refrigeradorPuerta"), function()
+			{
+				if (frigo.refrigeradorPuerta == true)
+				{
+					contRefrigeradorPuerta++;
+				}
+				else
+				{
+					contRefrigeradorPuerta = 0;
+				}
+			}
+			if (contRefrigeradorPuerta > 0)
+			{
+				contRefrigeradorPuerta++;
+				console.log(contRefrigeradorPuerta);
+			}*/
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL TEMPERATURA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			/* TEMPERATURA EXTERIOR */
