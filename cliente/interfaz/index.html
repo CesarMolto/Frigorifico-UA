@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="vertical-fill">
+<html class="vertical-fill" lang="es">
 
 <head>
-	<meta charset="utf8">
+	<meta charset="utf-8">
 	<title>Interfaz de Frigorífico</title>
 	<script src="../electro.js"></script>
 
@@ -17,8 +17,10 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<!-- GOOGLE SCRIPTS-->
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
 <body class="bg-dark vertical-fill">
@@ -48,7 +50,7 @@
 			<!-- TEMPERATURA REFRIGERADOR -->
 			<div id="div_temperatura_refrigerador">
 				<span class="tooltiptext">Temperatura actual</span>
-				<i class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:26px;color:white;"></i>
+				<i id="termometro_refrigerador" class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:26px;color:white;"></i>
 				<span id="temperatura_refrigerador" class="text-glow"></span>
 			</div>
 			<!-- CONTROL TEMPERATURA REFRIGERADOR -->
@@ -61,7 +63,7 @@
 			<!-- TEMPERATURA CONGELADOR -->
 			<div id="div_temperatura_congelador">
 				<span class="tooltiptext">Temperatura actual</span>
-				<i class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:26px;color:white;"></i>
+				<i id="termometro_congelador" class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:26px;color:white;"></i>
 				<span id="temperatura_congelador" class="text-glow"></span>
 			</div>
 			<!-- CONTROL TEMPERATURA CONGELADOR -->
@@ -151,7 +153,7 @@
 				<!-- BOTON ESTADISTICAS -->
 				<button id="myBtn2" type="button" class="btn btn-warning" data-toggle="modal" data-target="#estadisticas">
 					<span class="tooltiptext">Estadísticas</span>
-					<svg class="bi bi-graph-up" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+					<svg id="icon_estadisticas" class="bi bi-graph-up" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
 						<path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
 						<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"/>
@@ -159,18 +161,18 @@
 				</button>
 			</div>
 			<!-- PEDIDO -->
-			<div class="modal fade" id="pedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="pedido" tabindex="-1" role="dialog" aria-labelledby="modalPedido" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Pedido</h5>
+							<h5 class="modal-title" id="modalPedido">Pedido</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body bg-light">
 							<p>Introduzca el código de barras:</p>
-							<input id="input_pedido" class="form-control w-75 mx-auto my-4" type="number" placeholder="11111111, 22222222, 33333333..."></input>
+							<input id="input_pedido" class="form-control w-75 mx-auto my-4" type="number" placeholder="11111111, 22222222, 33333333...">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -180,11 +182,11 @@
 				</div>
 			</div>
 			<!-- ESTADISTICAS -->
-			<div class="modal fade" id="estadisticas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="estadisticas" tabindex="-1" role="dialog" aria-labelledby="modalEstadisticas" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Estadísticas</h5>
+							<h5 class="modal-title" id="modalEstadisticas">Estadísticas</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -219,7 +221,7 @@
                 </form>
             </div>
 
-			
+			<div id="google_translate_element"></div>
 			<!--
 			<svg class="bi bi-clock" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
@@ -235,6 +237,11 @@
 	=
 	=====================================================================================================-->
 	<script>
+
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+		}
+
         var frigo = new Electro();
 
 		frigo.on("connect", function () {
@@ -297,23 +304,103 @@
 			}
 
 			//Puerta refrigerador abierta
-			/*var contRefrigeradorPuerta = 0;
-			frigo.on("refrigeradorPuerta"), function()
+			frigo.on("refrigeradorPuerta", function()
 			{
 				if (frigo.refrigeradorPuerta == true)
 				{
-					contRefrigeradorPuerta++;
+					setTimeout(AlarmaPuertaRefrigeradorAbierta, 50000)
 				}
 				else
 				{
-					contRefrigeradorPuerta = 0;
+					frigo.frigorificoAlarma = false;
+					document.getElementById("alarma").style.fill = "white";
+				}
+			});
+			function AlarmaPuertaRefrigeradorAbierta()
+			{
+				if (frigo.refrigeradorPuerta == true)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
 				}
 			}
-			if (contRefrigeradorPuerta > 0)
+			
+			//Puerta congelador abierta
+			frigo.on("congeladorPuerta", function()
 			{
-				contRefrigeradorPuerta++;
-				console.log(contRefrigeradorPuerta);
-			}*/
+				if (frigo.congeladorPuerta == true)
+				{
+					setTimeout(AlarmaPuertaCongeladorAbierta, 30000)
+				}
+				else
+				{
+					frigo.frigorificoAlarma = false;
+					document.getElementById("alarma").style.fill = "white";
+				}
+			});
+			function AlarmaPuertaCongeladorAbierta()
+			{
+				if (frigo.congeladorPuerta == true)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
+				}
+			}
+			
+			//Temperatura refrigerador alta
+			frigo.on("refrigeradorTemperatura", function()
+			{
+				if (frigo.refrigeradorTemperatura > 15)
+				{
+					setTimeout(AlarmaRefrigeradorTemperaturaAlta, 60000)
+				}
+				else
+				{
+					document.getElementById("termometro_refrigerador").style.color = "white";
+				}
+			});
+			function AlarmaRefrigeradorTemperaturaAlta()
+			{
+				if (frigo.refrigeradorTemperatura > 15)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
+					document.getElementById("termometro_refrigerador").style.color = "red";
+				}
+			}
+			
+			//Temperatura congelador alta
+			frigo.on("congeladorTemperatura", function()
+			{
+				if (frigo.congeladorTemperatura > 15)
+				{
+					setTimeout(AlarmaCongeladorTemperaturaAlta, 60000)
+				}
+				else
+				{
+					document.getElementById("termometro_congelador").style.color = "white";
+				}
+			});
+			function AlarmaCongeladorTemperaturaAlta()
+			{
+				if (frigo.congeladorTemperatura > 15)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
+					document.getElementById("termometro_congelador").style.color = "red";
+				}
+			}
+
+			//Consumo
+			frigo.on("frigorificoConsumo", function()
+			{
+				if (frigo.frigorificoConsumo > 20000 && frigo.frigorificoConsumo < 20300)
+				{
+					frigo.frigorificoAlarma = true;
+					document.getElementById("alarma").style.fill = "red";
+					document.getElementById("icon_estadisticas").style.fill = "red";
+				}
+			});
 
 			/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTROL TEMPERATURA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 			/* TEMPERATURA EXTERIOR */
@@ -423,13 +510,13 @@
 
 			// Activar la luz del refrigerador cuando se abre la puerta
 			frigo.on("refrigeradorPuerta", function (abierta) {
-				console.log("Puerta refrigerador:", abierta);
+				//console.log("Puerta refrigerador:", abierta);
 				document.getElementById("luz_refrigerador").checked = !abierta;
 				document.getElementById("luz_refrigerador").click();
 			});
 			// Activar la luz del congelador cuando se abre la puerta
 			frigo.on("congeladorPuerta", function (abierta) {
-				console.log("Puerta congelador:", abierta);
+				//console.log("Puerta congelador:", abierta);
 				document.getElementById("luz_congelador").checked = !abierta;
 				document.getElementById("luz_congelador").click();
 			});
