@@ -6,17 +6,17 @@
 }
 
 /* REFRIGERATOR IMAGE */
-#img_nevera 
+.img_nevera 
 {   
     position: absolute;
     top: 115px;
     width: 265px;
 }
 
-/*.img-glow
+.img-red
 {
-    box-shadow: 0px 0px 8px 4px red;
-}*/
+    filter: brightness(50%) sepia(100) saturate(100) hue-rotate(25deg);
+}
 
 /* DISPLAY TEXT FOR TEMPERATURE CONTROL */
 .text-glow
@@ -87,14 +87,25 @@
 }
 
 /* TOOGLE SWITCH FOR LIGHT CONTROL*/
-#luz_refrigerador_label
+.div_luz_refrigerador
 {
+    position: absolute;
     top: 275px;
+    display: inline-block;
 }
 
-#luz_congelador_label
+.div_luz_congelador
 {
+    position: absolute;
     top: 485px;
+    display: inline-block;
+}
+
+.div_luz_refrigerador img, .div_luz_congelador img
+{
+    position: absolute;
+    top: -12px;
+    left: -40px;
 }
 
 /* The switch - the box around the slider */
@@ -182,6 +193,7 @@ input:checked + .slider:before
 {
     position: absolute;
     top: 315px;
+    transform: translate(10%, 0%);
     display: inline-block;
 }
 
@@ -189,6 +201,7 @@ input:checked + .slider:before
 {
     position: absolute;
     top: 519px;
+    transform: translate(10%, 0%);
     display: inline-block;
 }
 
@@ -395,10 +408,10 @@ input[type=radio]
   
 label 
 {
-    color: black;
+    color: white;
     cursor: pointer;
     font-weight: bold;
-    padding: 1px 20px;
+    padding: 0px 12px;
 
     margin: auto !important;
 }
@@ -413,6 +426,7 @@ input[type=radio]:checked + label
 {
     display: inline-block;
     margin: 20px;
+    margin-left: 5px;
     overflow: hidden;
     justify-content: center;
     vertical-align: middle;
@@ -446,5 +460,5 @@ input[type=radio]:checked + label
 #google_translate_element
 {
     position:absolute;
-    bottom: 20px;
+    top: 720px;
 }
