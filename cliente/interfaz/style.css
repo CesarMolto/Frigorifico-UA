@@ -9,7 +9,7 @@
 #img_nevera 
 {   
     position: absolute;
-    top: 230px;
+    top: 115px;
     width: 265px;
 }
 
@@ -28,17 +28,18 @@
 #hora
 {
     position: absolute;
-    top: 115px;
+    top: 15px;
     font-size: 22px;
-    color: #ddd;
-    border: solid 3px #aaa;
-    padding: 2px;
+    color: white;
+    border: solid 2px white;
+    border-radius: 10px;
+    padding: 3px 5px;
 }
 
 #sensor_presencia
 {
     position: absolute;
-    top: 160px;
+    top: 50px;
     margin-left: -100px;
     border-radius: 5px;
 }
@@ -46,7 +47,7 @@
 #btn_alarma
 {
     position: absolute;
-    top: 165px;
+    top: 53px;
     margin-left: 100px;
 }
 
@@ -54,43 +55,46 @@
 #div_temperatura_exterior
 {
     position: absolute;
-    top: 185px;
+    top: 65px;
     font-size: 22px;
-    border: dotted 2px #ddd;
-    padding: 0.2rem 0.4rem;
+    border: solid 2px white;
+    border-radius: 10px;
+    padding: 3px 7px;
 }
 
 /* TEMPERATURA REFRIGERADOR */
 #div_temperatura_refrigerador
 {
     position: absolute;
-    top: 270px;
-    font-size: 22px;
-    border: dotted 2px #ddd;
-    border-radius: 5px;
-    padding: 0.2rem 0.4rem;
+    top: 160px;
+    font-size: 20px;
+    border: solid 2px white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 3px 7px;
 }
 
 /* TEMPERATURA CONGELADOR */
 #div_temperatura_congelador
 {
     position: absolute;
-    top: 510px;
-    font-size: 22px;
-    border: dotted 2px #ddd;
-    border-radius: 5px;
-    padding: 0.2rem 0.4rem;
+    top: 382px;
+    font-size: 20px;
+    border: solid 2px white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 3px 7px;
 }
 
 /* TOOGLE SWITCH FOR LIGHT CONTROL*/
 #luz_refrigerador_label
 {
-    top: 400px;
+    top: 275px;
 }
 
 #luz_congelador_label
 {
-    top: 630px;
+    top: 485px;
 }
 
 /* The switch - the box around the slider */
@@ -177,44 +181,33 @@ input:checked + .slider:before
 #div_modo_refrigerador
 {
     position: absolute;
-    top: 440px;
-    padding: 0.2rem;
-    border: solid 2px #ddd;
-    border-radius: 5px;
+    top: 315px;
+    display: inline-block;
 }
 
 #div_modo_congelador
 {
     position: absolute;
-    top: 660px;
-    padding: 0.2rem;
-    border: solid 2px #ddd;
-    border-radius: 5px;
+    top: 519px;
+    display: inline-block;
 }
 
 #modo_refrigerador, #modo_congelador
 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #ddd;
-    border: solid 2px #ddd;
-    border-radius: 5px;
-    background-color: #343A40;
     margin-left: 0.5rem;
-    margin-top: 1px;
 }
 
 /***** CONTROL TEMPERATURA *****/
 #control_temperatura_refrigerador
 {
     position: absolute;
-    top: 290px;
+    top: 150px;
 }
 
 #control_temperatura_congelador
 {
     position: absolute;
-    top: 520px;
+    top: 372px;
 }
 
 input[type="number"] {
@@ -224,67 +217,66 @@ input[type="number"] {
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
--webkit-appearance: none;
+    -webkit-appearance: none;
 }
 .number-input {
-margin-top: 3rem;
+    margin-top: 3rem;
 }
 .number-input button {
--webkit-appearance: none;
-background-color: transparent;
-border: none;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-margin: 0;
-position: relative;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
 }
 .number-input button:before,
 .number-input button:after {
-display: inline-block;
-position: absolute;
-content: '';
-height: 2px;
-transform: translate(-50%, -50%);
+    display: inline-block;
+    position: absolute;
+    content: '';
+    height: 2px;
+    transform: translate(-50%, -50%);
 }
 .number-input button.plus:after {
-transform: translate(-50%, -50%) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg);
 }
 .number-input input[type=number] {
-text-align: center;
+    text-align: center;
 }
 
 .md-number-input.number-input {
-border: 2px solid #ddd;
-border-radius: 5px;
-width: 8rem;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 8rem;
 }
 .md-number-input.number-input button {
-outline: none;
-width: 2rem;
-height: 1rem;
-padding-top: .0rem;
+    outline: none;
+    width: 2rem;
+    height: 1rem;
+    padding-top: .0rem;
 }
 .md-number-input.number-input button.minus {
-padding-left: 8px;
+    padding-left: 8px;
 }
 .md-number-input.number-input button.plus {
-padding-left: 2px;
+    padding-left: 2px;
 }
 .md-number-input.number-input button:before,
 .md-number-input.number-input button:after {
-width: 1rem;
-background-color: #ddd;
+    width: 1rem;
+    background-color: white;
 }
 .md-number-input.number-input input[type=number] {
-max-width: 3rem;
-padding: .2rem;
-border: solid #ddd;
-border-width: 0 2px;
-font-size: 22px;
-height: 2rem;
-font-weight: bold;
-outline: none;
+    max-width: 3rem;
+    border: solid white;
+    border-width: 0 2px;
+    font-size: 20px;
+    height: 2rem;
+    font-weight: bold;
+    outline: none;
 }
 @media not all and (min-resolution:.001dpcm)
 { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
@@ -298,13 +290,13 @@ outline: none;
 #botones
 {
     position: absolute;
-    top: 720px;
+    top: 575px;
 }
 #myBtn, #myBtn2
 {
     margin: 1rem;
-    padding: 1rem;
-    font-size: 22px;
+    padding: 0.8rem;
+    font-size: 18px;
     font-weight: bold;
     border-radius: 50%;
 }
@@ -327,7 +319,7 @@ outline: none;
 .tooltiptext {
     opacity: 0;
     transition: opacity 1s;
-    font-size: 18px;
+    font-size: 14px;
     visibility: hidden;
     width: 120px;
     background-color: rgba(0,0,0,0.6);
@@ -338,6 +330,8 @@ outline: none;
     bottom: 110%;
     left: 50%;
     margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+
+    pointer-events: none;
    
     /* Position the tooltip text - see examples below! */
     position: absolute;
@@ -349,26 +343,24 @@ outline: none;
 #div_temperatura_congelador:hover .tooltiptext,#div_modo_refrigerador:hover .tooltiptext,
 #div_modo_congelador:hover .tooltiptext, #control_temperatura_refrigerador:hover .tooltiptext,
 #control_temperatura_congelador:hover .tooltiptext, #myBtn:hover .tooltiptext,
-#myBtn2:hover .tooltiptext, #pantalla:hover .tooltiptext {
+#myBtn2:hover .tooltiptext, #pantalla:hover .tooltiptext, #btn_alarma:hover .tooltiptext {
     visibility: visible;
     opacity: 1;   
-    transition-delay:1s;
+    transition-delay:0.8s;
 }
 
 /* Info msg */
 #myBtn .tooltiptext {
-    font-size: 20px;
     font-weight: normal;
     bottom: 90%;
-    margin-left: -115px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -105px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 
 /* Info msg */
 #myBtn2 .tooltiptext {
-    font-size: 20px;
     font-weight: normal;
     bottom: 90%;
-    margin-left: 0px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -10px; /* Use half of the width (120/2 = 60), to center the tooltip */
    
     /* Position the tooltip text - see examples below! */
     position: absolute;
@@ -379,31 +371,80 @@ outline: none;
 #pantalla
 {
     position: absolute;
-    top: 850px;
-    padding: 0.5rem;
-    border: solid 2px #ddd;
-    border-radius: 5px;
-}
-
-#modo_pantalla
-{
-    margin: 0.3rem;
-    font-size: 20px;
-    font-weight: bold;
-    color: #ddd;
-    border: solid 2px #ddd;
-    border-radius: 5px;
-    background-color: #343A40;
-}
-
-#modo_pantalla:hover, #modo_refrigerador:hover, #modo_congelador:hover
-{
-    cursor: pointer;
-    border: solid 2px #A0A0A0;
-    transition: border 0.7s;
+    top: 650px;
+    display: inline-block;
 }
 
 #icono_brillo
 {
     margin-bottom: 0.25rem;
+}
+
+/* RADIO BUTTONS */
+input[type=radio] 
+{
+    position: absolute;
+    opacity: 0;
+}
+
+.radio-div
+{
+    display: inline-block;
+    text-align: justify;
+}
+  
+label 
+{
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 1px 20px;
+
+    margin: auto !important;
+}
+
+input[type=radio]:checked + label
+{
+    color: black;
+    background-color: white;
+}
+
+.radio-group 
+{
+    display: inline-block;
+    margin: 20px;
+    overflow: hidden;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#pantalla_activada + label, #congelador_speed + label, #refrigerador_speed + label
+{
+    border-top: solid 2px white;
+    border-bottom: solid 2px white;
+    border-right: solid 2px white;
+
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#pantalla_atenuada + label, #congelador_encendido + label, #refrigerador_encendido + label
+{
+    border: solid 2px white;
+}
+
+#pantalla_apagada + label, #congelador_apagado + label, #refrigerador_apagado + label
+{
+    border-top: solid 2px white;
+    border-bottom: solid 2px white;
+    border-left: solid 2px white;
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#google_translate_element
+{
+    position:absolute;
+    bottom: 20px;
 }
